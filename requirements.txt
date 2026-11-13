@@ -1,0 +1,9 @@
+# Fase 1 (CPU)
+numpy
+pandas
+scikit-learn
+matplotlib
+# Fases 2 y 3 (GPU; en Google Colab ya vienen instaladas)
+torch
+transformers
+scipy

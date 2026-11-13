@@ -1,0 +1,7 @@
+# Datos: no se versionan (ver data/README.md)
+data/*.csv
+*.zip
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+.vercel
