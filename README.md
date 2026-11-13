@@ -3,6 +3,8 @@
 Proyecto Integrador de **Deep Learning** — Universidad Externado de Colombia, 2026
 **Autor:** Nelson Andrey García Patarroyo
 
+**Página del proyecto:** https://proyecto-integrador-deep-learning.vercel.app
+
 El proyecto replica el método de Blanco-Fernández et al. (2024) —ajuste de **RoBERTa-BNE** para detectar noticias falsas en español—, lo traslada a **134 afirmaciones colombianas verificadas** por fact-checkers y audita qué aprendió el modelo.
 
 ## Resultado en una línea
@@ -57,7 +59,7 @@ Entorno de ejecución: Python 3, PyTorch, Hugging Face Transformers y scikit-lea
 
 ## Página del proyecto
 
-La carpeta `web/` es un sitio estático (HTML, CSS y JavaScript, sin compilación). Para publicarlo en Vercel: **Add New → Project → importar este repositorio → Root Directory: `web` → Framework Preset: Other → Deploy**.
+Publicada en https://proyecto-integrador-deep-learning.vercel.app. La carpeta `web/` es un sitio estático (HTML, CSS y JavaScript, sin compilación). Para publicarlo en otra cuenta de Vercel: **Add New → Project → importar este repositorio → Root Directory: `web` → Framework Preset: Other → Deploy**.
 
 ## Decisiones técnicas principales
 
