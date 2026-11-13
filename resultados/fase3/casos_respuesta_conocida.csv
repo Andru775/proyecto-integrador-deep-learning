@@ -1,0 +1,33 @@
+par,tipo,y,texto,prob,pred
+1,verdadera · sobria,1,NP Bogotá es la capital de Colombia.,0.99999934,1
+1,falsa · sobria,0,NP Medellín es la capital de Colombia.,0.99999845,1
+1,verdadera · sensacionalista,1,NP ¡¡URGENTE!! BOGOTÁ ES LA CAPITAL DE COLOMBIA. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.20905435,0
+1,falsa · sensacionalista,0,NP ¡¡URGENTE!! MEDELLÍN ES LA CAPITAL DE COLOMBIA. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.08137651,0
+2,verdadera · sobria,1,NP El peso es la moneda oficial de Colombia.,1.0,1
+2,falsa · sobria,0,NP El dólar es la moneda oficial de Colombia.,0.99999475,1
+2,verdadera · sensacionalista,1,NP ¡¡URGENTE!! EL PESO ES LA MONEDA OFICIAL DE COLOMBIA. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.39940384,1
+2,falsa · sensacionalista,0,NP ¡¡URGENTE!! EL DÓLAR ES LA MONEDA OFICIAL DE COLOMBIA. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.16130611,0
+3,verdadera · sobria,1,NP El presidente de Colombia es elegido por voto popular.,0.12872198,0
+3,falsa · sobria,0,NP El presidente de Colombia es elegido por el Congreso de la República.,0.9880091,1
+3,verdadera · sensacionalista,1,NP ¡¡URGENTE!! EL PRESIDENTE DE COLOMBIA ES ELEGIDO POR VOTO POPULAR. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,3.180354e-05,0
+3,falsa · sensacionalista,0,NP ¡¡URGENTE!! EL PRESIDENTE DE COLOMBIA ES ELEGIDO POR EL CONGRESO DE LA REPÚBLICA. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.0006106414,0
+4,verdadera · sobria,1,NP Lavarse las manos con jabón ayuda a prevenir infecciones.,0.99999744,1
+4,falsa · sobria,0,NP Lavarse las manos con jabón causa infecciones.,0.99999964,1
+4,verdadera · sensacionalista,1,NP ¡¡URGENTE!! LAVARSE LAS MANOS CON JABÓN AYUDA A PREVENIR INFECCIONES. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.18174624,0
+4,falsa · sensacionalista,0,NP ¡¡URGENTE!! LAVARSE LAS MANOS CON JABÓN CAUSA INFECCIONES. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.20074102,0
+5,verdadera · sobria,1,NP La Registraduría Nacional del Estado Civil organiza las elecciones en Colombia.,0.7686275,1
+5,falsa · sobria,0,NP El Banco de la República organiza las elecciones en Colombia.,0.27456793,1
+5,verdadera · sensacionalista,1,NP ¡¡URGENTE!! LA REGISTRADURÍA NACIONAL DEL ESTADO CIVIL ORGANIZA LAS ELECCIONES EN COLOMBIA. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,3.251936e-05,0
+5,falsa · sensacionalista,0,NP ¡¡URGENTE!! EL BANCO DE LA REPÚBLICA ORGANIZA LAS ELECCIONES EN COLOMBIA. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,1.1178105e-06,0
+6,verdadera · sobria,1,NP Las vacunas aprobadas por el INVIMA pasan por ensayos clínicos antes de aplicarse.,0.98498356,1
+6,falsa · sobria,0,NP Las vacunas aprobadas por el INVIMA modifican el ADN de las personas.,0.99618065,1
+6,verdadera · sensacionalista,1,NP ¡¡URGENTE!! LAS VACUNAS APROBADAS POR EL INVIMA PASAN POR ENSAYOS CLÍNICOS ANTES DE APLICARSE. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.11824342,0
+6,falsa · sensacionalista,0,NP ¡¡URGENTE!! LAS VACUNAS APROBADAS POR EL INVIMA MODIFICAN EL ADN DE LAS PERSONAS. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.1573232,0
+7,verdadera · sobria,1,NP El Banco de la República fija la tasa de interés de intervención.,0.70267045,1
+7,falsa · sobria,0,NP El Ministerio de Educación fija la tasa de interés de intervención.,0.9368042,1
+7,verdadera · sensacionalista,1,NP ¡¡URGENTE!! EL BANCO DE LA REPÚBLICA FIJA LA TASA DE INTERÉS DE INTERVENCIÓN. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.028304795,0
+7,falsa · sensacionalista,0,NP ¡¡URGENTE!! EL MINISTERIO DE EDUCACIÓN FIJA LA TASA DE INTERÉS DE INTERVENCIÓN. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.06023847,0
+8,verdadera · sobria,1,NP Colombia está dividida en 32 departamentos y un distrito capital.,0.9999998,1
+8,falsa · sobria,0,NP Colombia está dividida en 50 departamentos.,0.9999954,1
+8,verdadera · sensacionalista,1,NP ¡¡URGENTE!! COLOMBIA ESTÁ DIVIDIDA EN 32 DEPARTAMENTOS Y UN DISTRITO CAPITAL. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.1631359,0
+8,falsa · sensacionalista,0,NP ¡¡URGENTE!! COLOMBIA ESTÁ DIVIDIDA EN 50 DEPARTAMENTOS. ¡¡COMPARTE ANTES DE QUE LO BORREN!!,0.03239095,0

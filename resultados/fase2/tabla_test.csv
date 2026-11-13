@@ -1,0 +1,5 @@
+modelo,accuracy,precision,recall,f1,mcc
+congelado,0.481 ± 0.000,0.458 ± 0.000,0.917 ± 0.000,0.611 ± 0.000,0.079 ± 0.000
+completo_1e-5,0.444 ± 0.000,0.440 ± 0.000,0.917 ± 0.000,0.595 ± 0.000,-0.032 ± 0.000
+línea base (TF-IDF+LR),0.556,0.500,0.417,0.455,0.086
+RoBERTa-BNE sin reentrenar (fuera de dominio),0.444,0.444,1.000,0.615,0.000
