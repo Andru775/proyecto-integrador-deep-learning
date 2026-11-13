@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Verdad o tono? · Desinformación en Colombia con RoBERTa-BNE</title>
+<meta name="description" content="Proyecto Integrador de Deep Learning (Universidad Externado de Colombia): replicación, traslado y auditoría de RoBERTa-BNE para detectar desinformación política en Colombia.">
+<link rel="icon" href="assets/hoja.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,100&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="barra">
+  <a class="marca" href="#inicio"><img src="assets/hoja.svg" alt="" width="22" height="22"> Verdad o tono</a>
+  <nav aria-label="Secciones">
+    <a href="#idea">La idea</a>
+    <a href="#metodo">Método</a>
+    <a href="#resultados">Resultados</a>
+    <a href="#auditoria">Auditoría</a>
+    <a href="#dictamen">Dictamen</a>
+    <a class="repo" data-repo href="#">Repositorio</a>
+  </nav>
+</header>
+
+<main id="contenido">
+
+<section id="inicio" class="hero">
+  <svg class="nervaduras" viewBox="0 0 600 600" aria-hidden="true">
+    <path d="M300 590 C300 420 300 250 300 20" />
+    <path d="M300 470 C240 430 190 380 150 300" /><path d="M300 470 C360 430 410 380 450 300" />
+    <path d="M300 360 C250 320 210 270 190 200" /><path d="M300 360 C350 320 390 270 410 200" />
+    <path d="M300 250 C265 215 240 170 235 120" /><path d="M300 250 C335 215 360 170 365 120" />
+  </svg>
+  <div class="hero-texto">
+    <p class="contexto">Proyecto Integrador de Deep Learning, Universidad Externado de Colombia</p>
+    <h1>¿Verdad o tono?</h1>
+    <p class="lede">Repliqué y trasladé a Colombia un modelo de lenguaje para detectar desinformación política, y luego lo audité. Acierta a ratos, pero lo que más mueve su decisión no es si el hecho es cierto, sino cómo está escrito.</p>
+    <p class="firma">Nelson Andrey García Patarroyo</p>
+  </div>
+
+  <div class="especimen" aria-labelledby="esp-titulo">
+    <h2 id="esp-titulo">Pruébalo con una afirmación de respuesta conocida</h2>
+    <label class="campo">Afirmación
+      <select id="par"></select>
+    </label>
+    <div class="conmutadores">
+      <fieldset class="segmentado" id="f-hecho">
+        <legend>El hecho es</legend>
+        <button type="button" data-v="1" aria-pressed="true">Verdadero</button>
+        <button type="button" data-v="0" aria-pressed="false">Falso</button>
+      </fieldset>
+      <fieldset class="segmentado" id="f-tono">
+        <legend>Escrito en tono</legend>
+        <button type="button" data-v="sobria" aria-pressed="true">Sobrio</button>
+        <button type="button" data-v="sensacionalista" aria-pressed="false">Sensacionalista</button>
+      </fieldset>
+    </div>
+    <div class="lamina">
+      <blockquote id="texto-caso"></blockquote>
+      <div class="medidor">
+        <svg id="tallo" viewBox="0 0 120 220" role="img" aria-labelledby="tallo-desc"><desc id="tallo-desc">Probabilidad de que sea verdadera según el modelo</desc></svg>
+        <div class="lectura">
+          <p class="p-valor"><span id="p-num">–</span><small>probabilidad de «verdadera»</small></p>
+          <p id="veredicto" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+    <p class="nota" id="hero-hallazgo"></p>
+  </div>
+</section>
+
+<section id="idea" class="bloque">
+  <div class="col-texto">
+    <h2>La idea</h2>
+    <p>Blanco-Fernández y colegas (2024) ajustaron RoBERTa-BNE, un Transformer preentrenado en español, con 57.231 noticias políticas de España y reportaron un F1 de 0,988. Este proyecto pregunta si ese método sirve para la desinformación que circula en Colombia, donde lo disponible son <strong>134 afirmaciones verificadas</strong> por organizaciones de fact-checking como Colombiacheck.</p>
+    <p>El cambio no es solo de tamaño. En el artículo, buena parte de las noticias falsas fueron generadas o alteradas a partir de noticias reales; los propios autores muestran que, con 63 titulares verificados de un debate electoral, la exactitud bajó del 98 % al 71 %. Aquí todo el material es natural: trinos, publicaciones de Facebook y páginas web.</p>
+  </div>
+  <dl class="cifras">
+    <div><dt>Afirmaciones verificadas</dt><dd>134</dd></div>
+    <div><dt>Falsas / verdaderas</dt><dd>74 / 60</dd></div>
+    <div><dt>Desarrollo / prueba</dt><dd>107 / 27</dd></div>
+    <div><dt>Noticias en el artículo</dt><dd>57.231</dd></div>
+  </dl>
+</section>
+
+<section id="metodo" class="bloque">
+  <h2>Método</h2>
+  <p class="intro">El proyecto avanzó en tres fases; cada una parte de la anterior y se compara siempre contra la misma línea base y la misma partición.</p>
+  <ol class="fases">
+    <li>
+      <h3>Línea base</h3>
+      <p>TF-IDF de palabras y pares de palabras con regresión logística. Validación cruzada: F1 0,639. Prueba: F1 0,455 y MCC 0,086.</p>
+    </li>
+    <li>
+      <h3>Replicación y traslado</h3>
+      <p>La réplica con 85 pasos de entrenamiento (frente a ~23.000 del artículo) colapsó a decir siempre «verdadera»: F1 0,736 frente a 0,988. En Colombia, el encoder congelado (F1 0,566) superó al ajuste completo (0,473), pero no a la línea base.</p>
+    </li>
+    <li>
+      <h3>Auditoría</h3>
+      <p>Modelo final: RoBERTa-BNE congelado con una cabeza entrenable, elegido solo con validación cruzada, diez semillas y umbral fijado en desarrollo. Luego, saliencia, atención, perturbaciones, casos de respuesta conocida, calibración y análisis de fallas.</p>
+    </li>
+  </ol>
+
+  <figure class="tuberia" aria-label="Arquitectura del modelo final">
+    <div class="nodo"><b>Texto</b><span>título + cuerpo</span></div>
+    <div class="nodo"><b>Tokenizador BPE</b><span>hasta 128 tokens</span></div>
+    <div class="nodo fuerte"><b>RoBERTa-BNE congelado</b><span>124,6 millones de parámetros</span></div>
+    <div class="nodo"><b>Vector [CLS]</b><span>768 dimensiones</span></div>
+    <div class="nodo vivo"><b>Cabeza entrenable</b><span>592 mil parámetros</span></div>
+    <div class="nodo"><b>p(verdadera)</b><span>umbral <span data-k="umbral" data-d="2"></span></span></div>
+    <figcaption>Solo la cabeza aprende con los datos colombianos; el encoder conserva lo que aprendió en español.</figcaption>
+  </figure>
+</section>
+
+<section id="resultados" class="bloque">
+  <h2>Resultados frente a la línea base</h2>
+  <div class="pestanas" role="tablist" aria-label="Conjunto evaluado">
+    <button role="tab" data-set="desarrollo_oof_107" aria-selected="false">Validación cruzada · 107</button>
+    <button role="tab" data-set="prueba_27" aria-selected="true">Prueba · 27</button>
+    <button role="tab" data-set="agregado_134" aria-selected="false">Las 134 juntas</button>
+  </div>
+  <div class="resultado-grid">
+    <div id="graf-metricas" class="grafico" role="tabpanel"></div>
+    <div class="col-texto">
+      <p id="lectura-set"></p>
+      <p>La prueba favorece al Transformer y la validación cruzada favorece a la línea base. Juntando las 134 predicciones, cada una hecha por un modelo que no había visto ese texto, la diferencia de AUC es <span data-k="comparacion.agregado_134.dAUCm" data-d="3"></span> con intervalo de 95 % entre <span data-k="comparacion.agregado_134.dAUC.0" data-d="3"></span> y <span data-k="comparacion.agregado_134.dAUC.1" data-d="3"></span>. <strong>No hay evidencia de que el modelo profundo sea mejor.</strong></p>
+      <p class="aviso">Un modelo que solo ve la fuente, el medio, las mayúsculas, los signos de exclamación y la longitud, sin leer el contenido, logra AUC <span data-k="techo.cv" data-d="2"></span> en validación cruzada. El Transformer: <span data-k="comparacion.desarrollo_oof_107.T.auc" data-d="2"></span>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="auditoria" class="bloque">
+  <h2>Auditoría: ¿qué usa el modelo para decidir?</h2>
+
+  <article class="hallazgo">
+    <div class="col-texto">
+      <h3>El tono pesa más que el hecho</h3>
+      <p>Redacté ocho pares de afirmaciones con respuesta conocida, cada una en versión sobria y sensacionalista. Entre las sobrias, el modelo no separa lo cierto de lo falso (AUC <span data-k="casos_resumen.auc_solo_sobrias" data-d="2"></span>): da en promedio <span data-k="casos_resumen.prob_media_por_tipo.falsa · sobria" data-d="2"></span> a las falsas y <span data-k="casos_resumen.prob_media_por_tipo.verdadera · sobria" data-d="2"></span> a las verdaderas. Escribirlas en mayúsculas con «¡URGENTE!» baja la probabilidad de «verdadera» en más de 0,6 puntos, sea el hecho cierto o no.</p>
+    </div>
+    <figure><img src="assets/figuras/fig_f3_casos.png" alt="Probabilidad asignada a cada par de afirmaciones según tono y veracidad"><figcaption>Círculos: versión sobria. Cuadros: versión sensacionalista. Línea punteada: umbral de decisión.</figcaption></figure>
+  </article>
+
+  <article class="hallazgo inverso">
+    <div class="col-texto">
+      <h3>Qué pasa si se le quita el estilo</h3>
+      <p>Cada variante se aplica a los 134 textos y cada texto lo evalúa un modelo que no lo vio en entrenamiento. Pasar el texto a minúsculas cambia el <span data-k="pert.minúsculas.cambia_pred" data-pct></span> de las predicciones y baja el MCC de <span data-k="pert.original.mcc" data-d="2"></span> a <span data-k="pert.minúsculas.mcc" data-d="2"></span>; quitar arrobas, hashtags y enlaces casi no lo afecta.</p>
+      <div id="graf-perturb" class="grafico"></div>
+    </div>
+    <div class="col-texto">
+      <h3>Qué palabras empujan la decisión</h3>
+      <p>La saliencia por gradiente × entrada asigna a cada token su aporte a la decisión. Los tokens en mayúsculas reciben <span data-k="saliencia.cat_MAYÚSCULAS" data-d="2"></span> veces la saliencia que les tocaría por frecuencia. La atención apenas coincide con la saliencia (ρ = <span data-k="saliencia.rho_att" data-d="2"></span> en la última capa), así que no sirve como explicación.</p>
+      <div id="graf-saliencia" class="grafico"></div>
+    </div>
+  </article>
+
+  <div class="visor" aria-labelledby="visor-titulo">
+    <div class="visor-cabeza">
+      <h3 id="visor-titulo">Lee un texto de prueba como lo lee el modelo</h3>
+      <label class="campo">Texto
+        <select id="ejemplo"></select>
+      </label>
+    </div>
+    <p class="visor-meta" id="visor-meta"></p>
+    <p class="fichas" id="fichas"></p>
+    <p class="leyenda-fichas"><span class="m-v">empuja hacia «verdadera»</span><span class="m-f">empuja hacia «falsa»</span> La intensidad indica cuánto pesa cada palabra en la decisión (suma de la saliencia de sus sub-tokens).</p>
+  </div>
+
+  <article class="hallazgo">
+    <div class="col-texto">
+      <h3>Confianza sin fundamento</h3>
+      <p>Las probabilidades se agolpan en los extremos y no corresponden a la frecuencia real (error de calibración ECE = <span data-k="comparacion.agregado_134.T.ece" data-d="2"></span>). Fuera de su dominio el modelo no duda: estos textos, que no son noticias, recibieron estas probabilidades de ser verdaderos.</p>
+      <ul id="lista-ood" class="ood"></ul>
+    </div>
+    <figure><img src="assets/figuras/fig_f3_calibracion.png" alt="Diagrama de calibración e histograma de probabilidades"><figcaption>Izquierda: calibración. Derecha: distribución de probabilidades por clase real.</figcaption></figure>
+  </article>
+</section>
+
+<section id="fallas" class="bloque">
+  <h2>Dónde falla</h2>
+  <div class="resultado-grid">
+    <div>
+      <div class="pestanas pequenas" role="tablist" aria-label="Agrupar errores por">
+        <button role="tab" data-g="fuente" aria-selected="true">Fuente</button>
+        <button role="tab" data-g="medio" aria-selected="false">Medio</button>
+        <button role="tab" data-g="largo" aria-selected="false">Longitud</button>
+      </div>
+      <div id="graf-fallas" class="grafico" role="tabpanel"></div>
+    </div>
+    <div class="col-texto">
+      <p>De 134 predicciones fuera de muestra, el modelo se equivoca en <span data-k="errores.total"></span>: <span data-k="errores.fp"></span> falsas pasan como verdaderas y <span data-k="errores.fn"></span> verdaderas se marcan como falsas.</p>
+      <p>El peor grupo es el contenido <strong>suplantado</strong>: falsedades que imitan a una fuente oficial o a un medio. Es justo el caso más dañino, y el modelo lo acepta como verdadero. Los textos cortos fallan más que los largos, y la mayoría de errores está en X (Twitter).</p>
+      <p>Que el error baje en medios de comunicación y páginas web es coherente con la auditoría: el modelo aprendió el registro de la prensa, no la verificación del hecho.</p>
+    </div>
+  </div>
+</section>
+
+<section id="dictamen" class="dictamen">
+  <h2>Dictamen</h2>
+  <p class="sentencia">Para este problema y con estos datos, la arquitectura profunda no se justificaba.</p>
+  <ul class="razones">
+    <li><b>No supera a la referencia.</b> Con las 134 predicciones fuera de muestra, la mejora de AUC frente a TF-IDF no es distinguible de cero.</li>
+    <li><b>Cuesta mucho más.</b> <span data-k="costo.embed_ms_por_texto" data-d="1"></span> ms por texto en GPU y 124,6 millones de parámetros, frente a <span data-k="costo.base_pred_ms_por_texto" data-d="2"></span> ms en CPU y <span data-k="costo.vocab_tfidf"></span> términos para la línea base.</li>
+    <li><b>Aprende el atajo equivocado.</b> La auditoría muestra que responde al tono y al registro del texto, no a la veracidad, y con una confianza que no merece.</li>
+  </ul>
+</section>
+
+<section id="limites" class="bloque">
+  <h2>Limitaciones y siguientes pasos</h2>
+  <div class="dos-col">
+    <div class="col-texto">
+      <h3>Lo que limita estas conclusiones</h3>
+      <ul>
+        <li>134 casos y una sola partición: la prueba de 27 tiene intervalos muy anchos.</li>
+        <li>La configuración se eligió entre seis candidatas con los mismos 107 casos de desarrollo.</li>
+        <li>Los casos de respuesta conocida los redacté yo; son una prueba de concepto, no una muestra representativa.</li>
+        <li>La réplica sobre el corpus del artículo se hizo con un presupuesto reducido y no reprodujo su resultado.</li>
+      </ul>
+    </div>
+    <div class="col-texto">
+      <h3>Qué haría falta para usarlo en serio</h3>
+      <ul>
+        <li>Más datos verificados y etiquetas por afirmación, no por fuente.</li>
+        <li>Entrenamiento con pares de mismo tono y distinto hecho, para obligar al modelo a mirar el contenido.</li>
+        <li>Abstenerse fuera del dominio y recalibrar las probabilidades.</li>
+        <li>Versionar datos y modelo, monitorear la deriva de tono y fuente, y dejar la decisión final a un verificador humano.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <p><strong>Nelson Andrey García Patarroyo</strong><br>Proyecto Integrador de Deep Learning, Universidad Externado de Colombia, 2026.</p>
+  <p>Código, cuadernos y resultados en el <a data-repo href="#">repositorio de GitHub</a>. Artículo base: Blanco-Fernández, Otero-Vizoso, Gil-Solla y García-Duque (2024), <i>Applied Sciences</i> 14, 9729.</p>
+  <p class="ia">Uso de IA: el proyecto usó Claude (Anthropic) como apoyo para escribir código, generar figuras y redactar. Las decisiones técnicas y su sustentación son del autor.</p>
+</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
